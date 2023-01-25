@@ -1,0 +1,64 @@
+<nav class="navbar bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/dashboard">
+            <img src="https://toppng.com//public/uploads/preview/bank-banking-finance-government-safe-secure-money-comments-bank-icon-pound-11563429008dykitdcjw3.png"
+                alt="Logo" height="24" class="d-inline-block align-text-top">
+            &nbsp; Online Banking App
+        </a>
+    </div>
+</nav>
+<div class="container-fluid mt-2">
+    <h1 class="text-primary">Transactions</h1>
+    <p style="text-align: justify;">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa, dolores. Possimus nisi facilis, mollitia ipsa,
+        sapiente necessitatibus iure provident voluptatem neque voluptates totam quisquam dolores non temporibus id quia
+        animi. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat nobis, nostrum facere molestiae
+        quisquam voluptas vero possimus, at cum cumque quidem officiis eveniet sapiente in iste asperiores nulla facilis
+        quasi! Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique sunt dignissimos corporis
+        voluptatibus. Quidem, incidunt architecto amet dignissimos exercitationem magni veniam aut iusto voluptatum,
+        dolor, dolore officia in a modi! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dignissimos dolorem
+        alias fuga distinctio, libero a harum sequi accusamus. Sed unde magni enim veniam expedita ipsam aliquid
+        delectus, quo iure consectetur. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt saepe ea,
+        accusantium itaque distinctio eius hic quibusdam laudantium vitae, possimus, mollitia corrupti? Cumque ad vero
+        beatae facilis quibusdam molestiae inventore. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat
+        nisi veritatis magnam non omnis? Voluptas earum a aperiam numquam ad rem aut harum, expedita, atque fugiat,
+        autem dolorem dolorum voluptatem? Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quae consectetur sed
+        ab, temporibus maiores ratione rem eos alias blanditiis natus ut doloribus accusamus fugiat repellat soluta
+        beatae autem aliquam dolorum!
+    </p>
+    <div class="container border p-3 m-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <h1 class="text-success">Transaction History</h1>
+            </div>
+            <div class="col-lg-4">
+                <label for="search">Search By:</label>&nbsp;
+                <input type="text" (keyup)="search($event)" id="search" placeholder="Transaction type">
+            </div>
+            <div class="col-lg-4">
+                <input type="text" (click)="generatePDF()" value="Export" class="btn btn-success">
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+    </div>
+    <table class="table border mt-3 text-center">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Transaction type</th>
+                <th>From Account</th>
+                <th>To Account</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of allTransactions | filter : searchKey :'type'; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{transaction.type}}</td>
+                <td>{{transaction.fromAcno}}</td>
+                <td>{{transaction.toAcno}}</td>
+                <td>{{transaction.amount}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,33 @@
+<app-header></app-header>
+<div class="row">
+    <div class="col-lg-7">
+        <img class="m-5" height="500px" src="https://static.vecteezy.com/system/resources/previews/004/449/885/original/online-banking-account-flat-illustration-digital-wallet-ewallet-services-cartoon-concept-financial-management-ebanking-transactions-internet-billing-system-isolated-metaphor-on-white-vector.jpg" alt="Login page">
+    </div>
+    <div class="col-lg-5 mt-5">
+        <h2 class="text-center"><b>LogIn</b></h2>
+        <form [formGroup]="loginForm" (ngSubmit)="login()" class="border p-5 mt-5 me-5">
+            <div class="form-floating mb-3">
+                <input name="acno" formControlName="acno" type="text" class="form-control" id="floatingInput" placeholder="Account Number">
+                <label for="floatingInput">Account Number</label>
+              </div>
+              <div *ngIf="this.loginForm.get('acno')?.errors&&this.loginForm.get('acno')?.touched" class="text-danger mb-2">Invalid Account Number</div>
+              <div class="form-floating mb-2">
+                <input name="pswd" formControlName="pswd" type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+              </div>
+              <div *ngIf="this.loginForm.get('pswd')?.errors&&this.loginForm.get('pswd')?.touched" class="text-danger mb-2">Password</div>
+              <div class="text-danger">
+                {{errorMsg}}
+              </div>
+            <div class="mt-4">
+                <button (click)="login()" type="submit" class="btn btn-primary">Log In
+                    <span *ngIf="successMsg" class="spinner-border text-light" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </span>
+                </button>
+                &nbsp;
+                <span>New user? Click here to <a routerLink="/register">Register</a></span>
+            </div>
+        </form>
+    </div>
+</div>

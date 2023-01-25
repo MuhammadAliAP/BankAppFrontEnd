@@ -1,0 +1,6 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Arimo&family=Dancing+Script&family=Fasthand&family=Gruppo&family=Island+Moments&family=Kaushan+Script&family=Lusitana&family=Monoton&family=Moon+Dance&family=Quicksand&family=Rubik+Vinyl&family=Rye&family=Satisfy&display=swap');
+body{
+    font-family: 'Quicksand', sans-serif;
+    overflow-x: hidden;
+}

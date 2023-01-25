@@ -1,0 +1,205 @@
+<nav *ngIf="!deleteConform" class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <div class="col-lg-10">
+            <a class="navbar-brand" routerLink="/dashboard">
+                <img src="https://toppng.com//public/uploads/preview/bank-banking-finance-government-safe-secure-money-comments-bank-icon-pound-11563429008dykitdcjw3.png"
+                    alt="Logo" height="24" class="d-inline-block align-text-top">
+                &nbsp; Online Banking App
+            </a>
+
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Services
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" data-bs-toggle="offcanvas" href="#offcanvasDeposit">Deposit</a>
+                        </li>
+                        <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Fund
+                                Transfer</a></li>
+                        <li><a class="dropdown-item" (click)="getBalance()" data-bs-toggle="offcanvas"
+                                href="#offcanvasExample">Balance Enquiry</a></li>
+                        <li><a class="dropdown-item" routerLink="/transactions">Mini Statement</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" (click)="deleteAccountFromNavBar()"><i
+                                    class="fa fa-solid fa-trash"></i>My Account</a></li>
+                        <li><a class="dropdown-item" (click)="logout()"><i
+                                    class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- child selecter -->
+<app-delete-conform (onDelete)="onDelete($event)" (onCancel)="onCancel()" [item]="acno"></app-delete-conform>
+
+<!-- logout spinner -->
+<div *ngIf="logoutDiv" class="container">
+    <div class="row text-center">
+        <div class="col-4"></div>
+        <div class="col-4"> <img src="https://www.eslboards.org/tutor/assets/img/loading.gif" height="150px"
+                style="width: 150px; " alt="">
+        </div>
+        <div class="col-4"></div>
+        <p>Please wait while logging out...</p>
+    </div>
+</div>
+
+
+<!-- delete spinner -->
+<div *ngIf="deleteSpinnerDiv" class="container">
+    <div class="row text-center">
+        <div class="col-4"></div>
+        <div class="col-4"> <img src="https://www.eslboards.org/tutor/assets/img/loading.gif" height="150px"
+                style="width: 150px; " alt="">
+        </div>
+        <div class="col-4"></div>
+        <p>Please wait while logging Deleting your Account...</p>
+    </div>
+</div>
+<!-- dashboard -->
+<div *ngIf="!logoutDiv" class="container">
+    <div *ngIf="!deleteConform"  class="row">
+        <div class="col-md-4">
+            <h1 style="margin-top: 100px;">Welcome {{user}}</h1>
+            <label style="text-align:justify;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam vitae hic
+                eaque rem,
+                dignissimos ut, voluptatem laudantium doloribus ratione delectus magnam dolor quia rerum, accusamus
+                cupiditate. Veritatis quos architecto quae.
+            </label>
+            <div style="text-align: justify;" class="collapse" id="collapseExample">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error ullam repudiandae odit, perferendis
+                aliquid, enim nisi nostrum maiores harum officiis quibusdam laboriosam suscipit sit perspiciatis
+                dolores, voluptatum ex qui. Provident!
+            </div>
+            <button (click)="collapse()" class="btn btn-primary mt-2" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Read <span *ngIf="isCollapse">More</span><span *ngIf="!isCollapse">Less</span>
+            </button>
+        </div>
+        <div class="col-md-8">
+            <img class="m-5" height="500px"
+                src="https://static.vecteezy.com/system/resources/previews/004/449/885/original/online-banking-account-flat-illustration-digital-wallet-ewallet-services-cartoon-concept-financial-management-ebanking-transactions-internet-billing-system-isolated-metaphor-on-white-vector.jpg"
+                alt="Login page">
+        </div>
+    </div>
+</div>
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h2 class="offcanvas-title" id="offcanvasExampleLabel">Balance Enquiry</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="text-center">
+            <img width="200px" src="https://i.pinimg.com/736x/86/1b/38/861b3844485fa9292a8110005dce5d4a.jpg"
+                alt="noimage">
+        </div>
+        <div style="margin-top: 60px;">
+            <h5>Dear {{user}}</h5>
+            <label for="">Your current account {{currentAcno}} balance is <b>{{balance}}</b></label>
+        </div>
+    </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDeposit" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h2 class="offcanvas-title" id="offcanvasExampleLabel">Deposit Form</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="text-center">
+            <img width="200px" src="https://i.pinimg.com/736x/86/1b/38/861b3844485fa9292a8110005dce5d4a.jpg"
+                alt="noimage">
+        </div>
+        <div style="margin-top: 60px;">
+            <h5>Dear {{user}}, you can enter the amount to depsit in your account</h5>
+            <form (ngSubmit)="deposit()" [formGroup]="depositForm" class="mt2 border p-2">
+                <div>
+                    <input name="amount" formControlName="amount" type="text" class="form-control"
+                        placeholder="Enter Amount">
+                </div>
+                <div *ngIf="this.depositForm.get('amount')?.errors&&this.depositForm.get('amount')?.touched"
+                    class="text-danger mb-2">Invalid Amount</div>
+                <div class="text-danger">{{depositMsg}}</div>
+                <button (click)="showconfetti($event.target)" class="btn btn-primary mt-2">Deposit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Fund Transfer</h1>
+                <button (click)="clearFundTransferForm()" type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mt-2">
+                    <form [formGroup]="fundTransferForm">
+                        <div class="form-floating mb-3">
+                            <input name="toAcno" formControlName="toAcno" type="text" class="form-control"
+                                id="floatingInput" placeholder="Credit Account Number">
+                            <label for="floatingInput">Credit Account Number</label>
+                        </div>
+                        <div *ngIf="this.fundTransferForm.get('toAcno')?.errors&&this.fundTransferForm.get('toAcno')?.touched"
+                            class="text-danger mb-2">Invalid Account Number</div>
+                        <div class="form-floating mb-2">
+                            <input name="pswd" formControlName="pswd" type="password" class="form-control"
+                                id="floatingPassword" placeholder="Profile Password">
+                            <label for="floatingPassword">Profile Password</label>
+                        </div>
+                        <div *ngIf="this.fundTransferForm.get('pswd')?.errors&&this.fundTransferForm.get('pswd')?.touched"
+                            class="text-danger mb-2">Invalid Password</div>
+                        <div class="form-floating mb-2">
+                            <input name="amount" formControlName="amount" type="text" class="form-control"
+                                id="floatingPassword" placeholder="Enter Amount">
+                            <label for="floatingPassword">Enter Amount</label>
+                        </div>
+                        <div *ngIf="this.fundTransferForm.get('amount')?.errors&&this.fundTransferForm.get('amount')?.touched"
+                            class="text-danger mb-2">Invalid Amount</div>
+                        <!-- <div class="text-danger">
+                        {{errorMsg}}
+                      </div> -->
+                        <!-- <div class="mt-4">
+                        <button (click)="transfer()" type="submit" class="btn btn-primary">Log In
+                             <span *ngIf="successMsg" class="spinner-border text-light" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                              </span> 
+                        </button>
+                        &nbsp;
+                        <span>New user? Click here to <a routerLink="/register">Register</a></span>
+                    </div> -->
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-success p-3">
+                {{fundTransferSuccessMsg}}
+            </div>
+            <div class="text-danger p-3">
+                {{fundTransferErrorMsg}}
+            </div>
+
+            <div class="modal-footer">
+                <button (click)="clearFundTransferForm()" type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Close</button>
+                <button (click)="transfer()" type="submit" class="btn btn-primary">Transfer</button>
+            </div>
+        </div>
+    </div>
+</div>
